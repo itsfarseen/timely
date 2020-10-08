@@ -1,5 +1,6 @@
 // webpack.config.js
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path')
 
 module.exports = [{
@@ -26,7 +27,8 @@ module.exports = [{
     },
     },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({template: './index.ejs'})
   ]
 }, {
     mode: 'development',
