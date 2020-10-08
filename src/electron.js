@@ -13,7 +13,7 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  win.loadFile('index.html')
+  win.loadFile('dist/index.html')
 
   win.webContents.openDevTools();
   const installExtension = require('electron-devtools-installer');
