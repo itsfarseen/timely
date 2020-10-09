@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 
 let win;
 
@@ -11,6 +11,9 @@ function createWindow () {
       nodeIntegration: true,
     }
   });
+
+
+  win.setAutoHideMenuBar(true);
 
   // and load the index.html of the app.
   win.loadURL('http://localhost:8081')

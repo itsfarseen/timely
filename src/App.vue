@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white min-h-screen">
+  <div class="bg-white min-h-screen flex flex-col">
     <nav class="p-2 flex space-x-4">
       <div v-for="tab in tabs"
            class="border-b border-gray-100"
@@ -8,7 +8,7 @@
         {{tab}}
       </div>
     </nav>
-    <main>
+    <main class="flex-1 flex flex-col">
       <Tasks v-if="tab_active == 'Tasks'"/>
       <Soon v-if="tab_active != 'Tasks'"/>
     </main>
