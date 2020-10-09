@@ -31,6 +31,10 @@ module.exports = [
         'vue$': 'vue/dist/vue.esm.js'
       },
     },
+    devServer: {
+      contentBase: './dist',
+      hot: true,
+    },
     plugins: [
       new VueLoaderPlugin(),
       new HtmlWebpackPlugin({template: './src/index.ejs'})

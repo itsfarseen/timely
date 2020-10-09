@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4">
-        <h2>Hello Vue File</h2>
+    <div class="p-2">
+        <h2>Hello Vue Files</h2>
     </div>
 </template>
