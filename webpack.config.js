@@ -10,9 +10,11 @@ module.exports = [
     entry: {
         browser: './src/browser.js',
     },
+    devtool: 'source-map',
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        sourceMapFilename: "[name].js.map"
     },
     module: {
       rules: [
