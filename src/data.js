@@ -17,17 +17,17 @@ function getBoardsDir() {
 }
 
 // todo rename to loadBoards
-function loadTasks() {
+function loadBoards() {
     let boardsDir = getBoardsDir();
     let files = fs.readdirSync(boardsDir);
     let tasks = [];
     for(let file of files) {
-        tasks.push(loadTask(path.join(boardsDir, file)))
+        tasks.push(loadBoard(path.join(boardsDir, file)))
     }
     return tasks;
 }
 
-function loadTask(taskFile) {
+function loadBoard(taskFile) {
     let contents = fs.readFileSync(taskFile, {encoding:'utf8', flag: 'r'})
     let lines = utils.splitLines(contents);
     let title = null;
@@ -64,5 +64,5 @@ export default {
     initialize,
     getDataDir,
     getBoardsDir,
-    loadTasks
+    loadBoards
 }

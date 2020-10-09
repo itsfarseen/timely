@@ -9,25 +9,25 @@
       </div>
     </nav>
     <main class="flex-1 flex flex-col">
-      <Tasks v-if="tab_active == 'Tasks'"/>
-      <Soon v-if="tab_active != 'Tasks'"/>
+      <Boards v-if="tab_active == 'Boards'"/>
+      <Soon v-if="tab_active != 'Boards'"/>
     </main>
   </div>
 </template>
 
 <script>
-import Tasks from './Tasks.vue'
+import Boards from './Boards.vue'
 import Soon from './Soon.vue'
 
 export default {
   components: {
     Soon,
-    Tasks
+    Boards
   },
   data: function () {
     return {
-      tabs: ["Tasks", "Timetable", "Schedule", "Timetrack"],
-      tab_active: "Tasks"
+      tabs: ["Boards", "Timetable", "Schedule", "Timetrack"],
+      tab_active: "Boards"
     }
   }
 }
