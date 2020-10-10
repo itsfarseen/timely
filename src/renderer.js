@@ -7,10 +7,10 @@ data.initialize();
 
 let vm = new Vue({
     el: "#app",
-    render:  h => h('App',''),
     components: {App},
     data: {
         a: 1 
     },
+    render:  h => h('App',''),
 });
 

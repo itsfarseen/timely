@@ -25,7 +25,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "dev": "webpack --config webpack.main.config.js && concurrently --kill-others \"webpack-dev-server --config webpack.renderer.config.js\" \"electron .\""
+    "dev": "webpack --config webpack.main.config.js && concurrently --kill-others \"webpack-dev-server --config webpack.renderer.config.js\" \"electron .\"",
+    "lint": "eslint ."
   },
   "dependencies": {
     "tailwindcss": "^1.8.12",

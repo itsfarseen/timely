@@ -5,11 +5,12 @@
     >
       <div>
         <div class="p-3">
-&nbsp
+&nbsp;
         </div>
         <div class="divide-y divide-gray-100">
           <div
             v-for="hr of hrs"
+            :key="hr"
             class="text-sm p-3 text-gray-500"
             :style="{height: 'calc(-1px + ' + scale_1hr_em + 'em)'}"
           >
@@ -19,6 +20,7 @@
       </div>
       <div
         v-for="(weekData,week) of weekBasedTimetable"
+        :key="week"
         class="flex-1 flex flex-col"
       >
         <div class="p-3 text-center">
@@ -27,6 +29,7 @@
         <div class="bg-gray-200 flex-1 relative">
           <div
             v-for="data of weekData"
+            :key="data.title"
             class="border-red-500 border"
             :style="weekGridStyle(data)"
           >

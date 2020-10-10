@@ -3,6 +3,7 @@
     <nav class="p-2 flex space-x-4">
       <div
         v-for="tab in tabs"
+        :key="tab"
         class="border-b border-gray-100"
         :class="tab_active == tab?'border-red-500':'hover:border-red-300'"
         @click="tab_active=tab"
@@ -19,12 +20,10 @@
 
 <script>
 import Boards from './Boards.vue'
-import Soon from './Soon.vue'
 import Timetable from './Timetable.vue'
 
 export default {
   components: {
-    Soon,
     Boards,
     Timetable,
   },
