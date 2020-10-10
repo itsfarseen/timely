@@ -1,7 +1,7 @@
 module.exports = {
   future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
   purge: [
       "./src/**/*.vue",
@@ -10,10 +10,8 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {},
-  plugins: [],
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
+  variants: {
+    visibility: ['group-hover']
   },
+  plugins: [],
 }

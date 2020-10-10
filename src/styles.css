@@ -5,5 +5,27 @@
 @tailwind utilities;
 
 html {
-  font-size: 14px;
+  font-size: 12px;
+}
+
+.board-btn {
+  @apply flex-1 bg-white px-4 py-2;
+  &:hover {
+    @apply bg-red-600 text-white;
+  }
+}
+
+.new-board-btn {
+  @apply flex-1 px-4 py-2;
+  &:hover {
+    @apply bg-red-600 text-white;
+  }
+}
+
+.board-box {
+  @apply bg-white border border-gray-300 w-64 flex flex-col;
+}
+
+.new-board-box {
+  @apply bg-gray-100 border border-gray-300 w-64 flex flex-col;
 }
