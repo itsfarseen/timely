@@ -1,9 +1,11 @@
 <template>
   <div class="flex-1 flex bg-gray-200 p-4">
+    <!-- Grid -->
     <div
-      class="flex-1 bg-white border flex divide-x"
+      class="flex-1 border flex divide-x divide-gray-100"
     >
-      <div>
+      <!-- Time Column -->
+      <div class="bg-white">
         <div class="p-3">
 &nbsp;
         </div>
@@ -18,31 +20,42 @@
           </div>
         </div>
       </div>
-      <div
-        v-for="(weekData,week) of weekBasedTimetable"
-        :key="week"
-        class="flex-1 flex flex-col"
-      >
-        <div class="p-3 text-center">
-          {{ week }}
-        </div>
-        <div class="bg-gray-200 flex-1 relative">
+      <!-- /Time Column -->
+      <!-- Main Column -->
+      <div class="flex-1 flex divide-x divide-gray-100">
+        <div
+          v-for="(weekData,week) of weekBasedTimetable"
+          :key="week"
+          class="flex flex-col"
+          style="width: calc(100% / 7)"
+        >
           <div
-            v-for="data of weekData"
-            :key="data.title"
-            class="border-red-500 border"
-            :style="weekGridStyle(data)"
+            class="p-3 text-center truncate sticky top-0 z-10 bg-white bg-opacity-50"
           >
-            {{ data.title }}
+            {{ week }}
+          </div>
+          <div class="bg-gray-100 flex-1 relative">
+            <div
+              v-for="data of weekData"
+              :key="data.title"
+              class="border-red-500 border"
+              :style="weekGridStyle(data)"
+            >
+              {{ data.title }}
+            </div>
           </div>
         </div>
       </div>
+      <!-- /Main Column -->
     </div>
+    <!-- /Grid -->
   </div>
 </template>
 
 <script>
-import { DateTime } from 'luxon';
+
+import {parse, intervalToDuration} from 'date-fns';
+
 export default {
   data() {
     return {
