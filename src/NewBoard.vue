@@ -1,11 +1,35 @@
 <template>
   <div class="new-board-box">
-    <button v-if="!editing" class="new-board-btn" @click="startEditing">New Board</button>
-    <div v-if="editing" class="flex flex-col divide-y">
-      <input type="text" class="p-4" v-model="boardName" placeholder="Board name">
+    <button
+      v-if="!editing"
+      class="new-board-btn"
+      @click="startEditing"
+    >
+      New Board
+    </button>
+    <div
+      v-if="editing"
+      class="flex flex-col divide-y"
+    >
+      <input
+        v-model="boardName"
+        type="text"
+        class="p-4"
+        placeholder="Board name"
+      >
       <div class="flex divide-x">
-        <button class="board-btn" @click="cancel">Cancel</button>
-        <button class="board-btn" @click="save">Save</button>
+        <button
+          class="board-btn"
+          @click="cancel"
+        >
+          Cancel
+        </button>
+        <button
+          class="board-btn"
+          @click="save"
+        >
+          Save
+        </button>
       </div>
     </div>
   </div>

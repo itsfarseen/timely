@@ -1,10 +1,14 @@
 <template>
   <div class="flex flex-wrap bg-gray-200 flex-1 p-4 gap-4 items-start content-start">
-    <Board v-for="(board, idx) in boards" :board="board" :key="board.file"
-           @add-item='newBoardItem(idx, $event)'
-           @edit-item='editItem(idx, $event)'
-           @delete-item='deleteItem(idx, $event)'/>
-    <NewBoard @save='newBoard'/>
+    <Board
+      v-for="(board, idx) in boards"
+      :key="board.file"
+      :board="board"
+      @add-item="newBoardItem(idx, $event)"
+      @edit-item="editItem(idx, $event)"
+      @delete-item="deleteItem(idx, $event)"
+    />
+    <NewBoard @save="newBoard" />
   </div>
 </template>
 
