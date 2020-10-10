@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white min-h-screen flex flex-col">
-    <nav class="p-2 flex space-x-4">
+  <div class="h-screen flex flex-col">
+    <nav class="p-2 flex space-x-4 bg-white">
       <div
         v-for="tab in tabs"
         :key="tab"
@@ -11,7 +11,7 @@
         {{ tab }}
       </div>
     </nav>
-    <main class="flex-1 flex flex-col">
+    <main class="flex-1 flex flex-col overflow-y-auto">
       <Boards v-if="tab_active == 'Boards'" />
       <Timetable v-if="tab_active == 'Timetable'" />
     </main>

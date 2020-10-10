@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex bg-gray-200 p-4">
+  <div class="flex-1 flex bg-gray-200 p-4 relative">
     <!-- Grid -->
     <div
       class="flex-1 border flex divide-x divide-gray-100"
@@ -14,7 +14,7 @@
             v-for="hr of hrs"
             :key="hr"
             class="text-sm p-3 text-gray-500"
-            :style="{height: 'calc(-1px + ' + scale_1hr_em + 'em)'}"
+            :style="{height: 'calc(-1px + ' + scale_1hr_em + 'rem)'}"
           >
             {{ hr }}
           </div>
@@ -38,7 +38,7 @@
             <div
               v-for="data of weekData"
               :key="data.title"
-              class="border-red-500 border"
+              class="border-red-100 border p-3 bg-white"
               :style="weekGridStyle(data)"
             >
               {{ data.title }}
@@ -59,12 +59,12 @@ import {parse, intervalToDuration} from 'date-fns';
 export default {
   data() {
     return {
-      scale_1hr_em: '5',
+      scale_1hr_em: '4',
       timetable: {
         "PPL": {
           "Monday": [{from: "02:15 PM", to: "03:15 PM"}],
-          "Tuesday":[{from: "10:15 PM", to: "11:15 PM"}],
-          "Thursday": [{from: "11:30 PM", to: "12:30 PM"}],
+          "Tuesday":[{from: "10:15 AM", to: "11:15 AM"}],
+          "Thursday": [{from: "11:30 AM", to: "12:30 PM"}],
           "Friday": [{from: "8:00 AM", to: "9:00 AM"}],
         },
       }
@@ -105,19 +105,24 @@ export default {
   },
   methods: {
     weekGridStyle({from, to}) {
-      let hrs = parseInt(from.split(":")[0]);
-      let minutes  = from
+      from = parse(from, 'hh:mm a', new Date());
+      to = parse(to, 'hh:mm a', new Date());
+      let midnight = parse('12:00 AM', 'hh:mm a', new Date());
+      let dur = intervalToDuration({start: from, end:to});
+      let durHrs = dur.hours + dur.minutes/60;
+      let offset = intervalToDuration({start: midnight, end:from});
+      let offsetHrs = offset.hours + offset.minutes/60;
+      let top = offsetHrs * this.scale_1hr_em;
+      let height = durHrs * this.scale_1hr_em;
+      return {
+        position: 'absolute',
+        width: '100%',
+        top: `${top}rem`,
+        height: `${height}rem`,
+      }
     }
   }
 }
 
-function timeComps(timeStr) {
-  let comps1 = timeStr.split(":");
-  let comps2 = comps1[1].split(" ");
-  let hrs = parseInt(comps1[0]);
-  let mins = parseInt(comps2[0]);
-  let am_pm = comps2[1];
-  return {hrs, mins, am_pm};
-}
 
 </script>
