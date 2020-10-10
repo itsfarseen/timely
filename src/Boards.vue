@@ -4,6 +4,8 @@
       v-for="(board, idx) in boards"
       :key="board.file"
       :board="board"
+      @delete="deleteBoard(idx)"
+      @rename="renameBoard(idx, $event)"
       @add-item="newBoardItem(idx, $event)"
       @edit-item="editItem(idx, $event)"
       @delete-item="deleteItem(idx, $event)"
@@ -44,7 +46,15 @@ export default {
     deleteItem: function(boardIdx, idx) {
       this.boards[boardIdx].items.splice(idx, 1)
       data.saveBoards(this.boards);
-    }
+    },
+    deleteBoard: function(idx) {
+      this.boards.splice(idx,1);
+      data.saveBoards(this.boards);
+    },
+    renameBoard: function(idx, newName) {
+      this.boards[idx].title = newName;
+      data.saveBoards(this.boards);
+    },
   }
 }
 </script> 
