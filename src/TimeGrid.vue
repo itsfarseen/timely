@@ -53,70 +53,69 @@
 
 <script>
 
-import {parse, intervalToDuration} from 'date-fns';
+import { parse, intervalToDuration } from 'date-fns'
 
 export default {
   props: {
     timetable: Object
   },
-  data() {
+  data () {
     return {
-      scale_1hr_em: '4',
+      scale_1hr_em: '4'
     }
   },
   computed: {
-    hrs() {
-      let hrs = ['12:00 AM'];
-      for(let i = 1; i<12; i++) {
-        hrs.push(String(i).padStart(2,0) + ":00 AM");
+    hrs () {
+      const hrs = ['12:00 AM']
+      for (let i = 1; i < 12; i++) {
+        hrs.push(String(i).padStart(2, 0) + ':00 AM')
       }
-      hrs.push('12:00 PM');
-      for(let i = 1; i<12; i++) {
-        hrs.push(String(i).padStart(2,0) + ":00 PM");
+      hrs.push('12:00 PM')
+      for (let i = 1; i < 12; i++) {
+        hrs.push(String(i).padStart(2, 0) + ':00 PM')
       }
-      return hrs;
+      return hrs
     },
-    weekBasedTimetable() {
-      let weekTimetable = {
-        "Sunday": [],
-        "Monday": [],
-        "Tuesday": [],
-        "Wednessday": [],
-        "Thursday": [],
-        "Friday": [],
-        "Saturday": [],
-      };
-      for(let subject in this.timetable) {
-        let subjectData = this.timetable[subject];
-        for(let week in subjectData) {
-          for(let entry of subjectData[week]) {
-            weekTimetable[week].push({title: subject, from: entry.from, to: entry.to})
+    weekBasedTimetable () {
+      const weekTimetable = {
+        Sunday: [],
+        Monday: [],
+        Tuesday: [],
+        Wednessday: [],
+        Thursday: [],
+        Friday: [],
+        Saturday: []
+      }
+      for (const subject in this.timetable) {
+        const subjectData = this.timetable[subject]
+        for (const week in subjectData) {
+          for (const entry of subjectData[week]) {
+            weekTimetable[week].push({ title: subject, from: entry.from, to: entry.to })
           }
         }
       }
-      return weekTimetable;
+      return weekTimetable
     }
   },
   methods: {
-    weekGridStyle({from, to}) {
-      from = parse(from, 'hh:mm a', new Date());
-      to = parse(to, 'hh:mm a', new Date());
-      let midnight = parse('12:00 AM', 'hh:mm a', new Date());
-      let dur = intervalToDuration({start: from, end:to});
-      let durHrs = dur.hours + dur.minutes/60;
-      let offset = intervalToDuration({start: midnight, end:from});
-      let offsetHrs = offset.hours + offset.minutes/60;
-      let top = offsetHrs * this.scale_1hr_em;
-      let height = durHrs * this.scale_1hr_em;
+    weekGridStyle ({ from, to }) {
+      from = parse(from, 'hh:mm a', new Date())
+      to = parse(to, 'hh:mm a', new Date())
+      const midnight = parse('12:00 AM', 'hh:mm a', new Date())
+      const dur = intervalToDuration({ start: from, end: to })
+      const durHrs = dur.hours + dur.minutes / 60
+      const offset = intervalToDuration({ start: midnight, end: from })
+      const offsetHrs = offset.hours + offset.minutes / 60
+      const top = offsetHrs * this.scale_1hr_em
+      const height = durHrs * this.scale_1hr_em
       return {
         position: 'absolute',
         width: '100%',
         top: `${top}rem`,
-        height: `${height}rem`,
+        height: `${height}rem`
       }
     }
-    }
+  }
 }
-
 
 </script>
