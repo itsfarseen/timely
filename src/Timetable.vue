@@ -2,10 +2,10 @@
   <div class="flex-1 flex bg-gray-200 p-4 relative">
     <!-- Grid -->
     <div
-      class="flex-1 border flex divide-x divide-gray-100"
+      class="flex-1 border flex divide-x divide-gray-100 bg-white"
     >
       <!-- Time Column -->
-      <div class="bg-white">
+      <div class="">
         <div class="p-3">
 &nbsp;
         </div>
@@ -13,7 +13,7 @@
           <div
             v-for="hr of hrs"
             :key="hr"
-            class="text-sm p-3 text-gray-500"
+            class="text-sm p-3 text-gray-600"
             :style="{height: 'calc(-1px + ' + scale_1hr_em + 'rem)'}"
           >
             {{ hr }}
@@ -30,15 +30,16 @@
           style="width: calc(100% / 7)"
         >
           <div
-            class="p-3 text-center truncate sticky top-0 z-10 bg-white bg-opacity-50"
+            class="p-3 text-center text-gray-600 truncate sticky top-0 z-10
+            bg-white bg-opacity-75 border-b border-gray-100"
           >
             {{ week }}
           </div>
-          <div class="bg-gray-100 flex-1 relative">
+          <div class="flex-1 relative">
             <div
               v-for="data of weekData"
               :key="data.title"
-              class="border-red-100 border p-3 bg-white"
+              class="p-3 bg-blue-300"
               :style="weekGridStyle(data)"
             >
               {{ data.title }}
