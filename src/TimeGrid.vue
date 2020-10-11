@@ -57,7 +57,7 @@ import { parse, intervalToDuration } from 'date-fns'
 
 export default {
   props: {
-    timetable: Object
+    timetable: Array
   },
   data () {
     return {
@@ -86,12 +86,13 @@ export default {
         Friday: [],
         Saturday: []
       }
-      for (const subject in this.timetable) {
-        const subjectData = this.timetable[subject]
-        for (const week in subjectData) {
-          for (const entry of subjectData[week]) {
-            weekTimetable[week].push({ title: subject, from: entry.from, to: entry.to })
-          }
+      for (const entry of this.timetable) {
+        for (const sched of entry.items) {
+          weekTimetable[sched.week].push({
+            title: entry.name,
+            from: sched.from,
+            to: sched.to
+          })
         }
       }
       return weekTimetable
