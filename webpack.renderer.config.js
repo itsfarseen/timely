@@ -1,7 +1,7 @@
 // webpack.config.js
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    sourceMapFilename: "[file].map[query]",
+    sourceMapFilename: '[file].map[query]'
   },
   module: {
     rules: [
@@ -22,22 +22,22 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
+        use: ['style-loader', 'css-loader', 'postcss-loader']
+      }
     ]
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    },
+      vue$: 'vue/dist/vue.esm.js'
+    }
   },
   devServer: {
     contentBase: './dist',
-    hot: true,
+    hot: true
   },
   plugins: [
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({template: './src/index.ejs'}),
+    new HtmlWebpackPlugin({ template: './src/index.ejs' })
   ]
-};
+}

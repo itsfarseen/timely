@@ -1,7 +1,7 @@
-export function splitLines(t) { 
-    return t.split(/\r\n|\r|\n/); 
+export function splitLines (t) {
+  return t.split(/\r\n|\r|\n/)
 }
 
 export default {
-    splitLines
+  splitLines
 }
