@@ -95,45 +95,44 @@
 </template>
 
 <script>
-import BoardItem from './BoardItem.vue';
-const FOO = 123;
+import BoardItem from './BoardItem.vue'
 export default {
-  components: {BoardItem},
+  components: { BoardItem },
   props: {
     board: Object
   },
-  data: function() {
+  data: function () {
     return {
       adding: false,
-      addItem: {title: "", desc: ""},
+      addItem: { title: '', desc: '' },
       renaming: false,
-      newName: "",
+      newName: ''
     }
   },
   methods: {
-    startAdding: function() {
-      this.adding = true;
-      this.addItem.title= "";
-      this.addItem.desc= "";
+    startAdding: function () {
+      this.adding = true
+      this.addItem.title = ''
+      this.addItem.desc = ''
     },
-    save: function() {
-      if(this.addItem.title === "") return;
-      this.$emit("add-item", this.addItem);
-      this.adding = false;
+    save: function () {
+      if (this.addItem.title === '') return
+      this.$emit('add-item', this.addItem)
+      this.adding = false
     },
-    cancel: function() {
-      this.adding = false;
+    cancel: function () {
+      this.adding = false
     },
-    startRename: function() {
-      this.renaming = true;
-      this.newName = this.board.title;
+    startRename: function () {
+      this.renaming = true
+      this.newName = this.board.title
     },
-    saveRename: function() {
-      this.$emit("rename", this.newName);
-      this.renaming = false;
+    saveRename: function () {
+      this.$emit('rename', this.newName)
+      this.renaming = false
     },
-    cancelRename: function() {
-      this.renaming = false;
+    cancelRename: function () {
+      this.renaming = false
     }
   }
 }

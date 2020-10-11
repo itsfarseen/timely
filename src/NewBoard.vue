@@ -38,24 +38,24 @@
 <script>
 export default {
   props: [],
-  data: function() {
+  data: function () {
     return {
-      boardName: "",
+      boardName: '',
       editing: false
     }
   },
   methods: {
-    startEditing: function() {
-      this.boardName = "";
-      this.editing = true;
+    startEditing: function () {
+      this.boardName = ''
+      this.editing = true
     },
-    save: function() {
-      if(this.boardName === "") return;
-      this.$emit("save", this.boardName);
-      this.editing = false;
+    save: function () {
+      if (this.boardName === '') return
+      this.$emit('save', this.boardName)
+      this.editing = false
     },
-    cancel: function() {
-      this.editing = false;
+    cancel: function () {
+      this.editing = false
     }
   }
 }

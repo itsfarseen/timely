@@ -25,12 +25,12 @@ import Timetable from './Timetable.vue'
 export default {
   components: {
     Boards,
-    Timetable,
+    Timetable
   },
   data: function () {
     return {
-      tabs: ["Boards", "Timetable", "Schedule", "Timetrack"],
-      tab_active: "Boards"
+      tabs: ['Boards', 'Timetable', 'Schedule', 'Timetrack'],
+      tab_active: 'Boards'
     }
   }
 }

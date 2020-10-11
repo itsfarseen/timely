@@ -58,24 +58,24 @@ export default {
   props: {
     item: Object
   },
-  data: function() {
+  data: function () {
     return {
       editing: false,
-      editItem: {title: "", desc: ""}
+      editItem: { title: '', desc: '' }
     }
   },
   methods: {
-    startEditing: function() {
-      this.editing = true;
-      this.editItem.title = this.item.title;
-      this.editItem.desc = this.item.desc;
+    startEditing: function () {
+      this.editing = true
+      this.editItem.title = this.item.title
+      this.editItem.desc = this.item.desc
     },
-    cancel: function() {
-      this.editing = false; 
+    cancel: function () {
+      this.editing = false
     },
-    save: function() {
-      this.editing = false; 
-      this.$emit("edit", this.editItem);
+    save: function () {
+      this.editing = false
+      this.$emit('edit', this.editItem)
     }
   }
 }

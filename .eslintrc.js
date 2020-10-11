@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ['node_modules', 'dist', 'dist-main'],
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',

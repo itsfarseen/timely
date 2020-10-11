@@ -20,41 +20,41 @@ import NewBoard from './NewBoard.vue'
 import data from './data.js'
 
 export default {
-  components: {Board, NewBoard},
-  data : function() {
+  components: { Board, NewBoard },
+  data: function () {
     return {
       boards: []
     }
   },
-  mounted: function() {
-    let boards = data.loadBoards();
-    this.boards = boards;
+  mounted: function () {
+    const boards = data.loadBoards()
+    this.boards = boards
   },
   methods: {
-    newBoard: function(boardName) {
-      this.boards.push({title: boardName, items: []});
-      data.saveBoards(this.boards);
+    newBoard: function (boardName) {
+      this.boards.push({ title: boardName, items: [] })
+      data.saveBoards(this.boards)
     },
-    newBoardItem: function(idx, {title, desc}) {
-      this.boards[idx].items.push({title, desc});
-      data.saveBoards(this.boards);
+    newBoardItem: function (idx, { title, desc }) {
+      this.boards[idx].items.push({ title, desc })
+      data.saveBoards(this.boards)
     },
-    editItem: function(boardIdx, [idx, newItem]) {
-      this.boards[boardIdx].items.splice(idx, 1, newItem);
-      data.saveBoards(this.boards);
+    editItem: function (boardIdx, [idx, newItem]) {
+      this.boards[boardIdx].items.splice(idx, 1, newItem)
+      data.saveBoards(this.boards)
     },
-    deleteItem: function(boardIdx, idx) {
+    deleteItem: function (boardIdx, idx) {
       this.boards[boardIdx].items.splice(idx, 1)
-      data.saveBoards(this.boards);
+      data.saveBoards(this.boards)
     },
-    deleteBoard: function(idx) {
-      this.boards.splice(idx,1);
-      data.saveBoards(this.boards);
+    deleteBoard: function (idx) {
+      this.boards.splice(idx, 1)
+      data.saveBoards(this.boards)
     },
-    renameBoard: function(idx, newName) {
-      this.boards[idx].title = newName;
-      data.saveBoards(this.boards);
-    },
+    renameBoard: function (idx, newName) {
+      this.boards[idx].title = newName
+      data.saveBoards(this.boards)
+    }
   }
 }
-</script> 
+</script>
