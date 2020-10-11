@@ -38,10 +38,15 @@
           <div
             v-for="(data,idx) of weekData"
             :key="idx"
-            class="p-3 bg-blue-300"
+            class="p-3 bg-blue-300 flex flex-col group"
             :style="weekGridStyle(data)"
           >
-            {{ data.title }}
+            <div class="flex-1">
+              {{ data.title }}
+            </div>
+            <div class="text-sm flex gap-2 invisible group-hover:visible">
+              <a class="text-gray-700 hover:underline cursor-pointer">Edit</a>
+            </div>
           </div>
         </div>
       </div>

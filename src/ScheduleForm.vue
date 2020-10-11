@@ -4,7 +4,7 @@
     style="min-width: 40rem"
   >
     <div class="font-bold pt-4 text-gray-600">
-      Add Schedule
+      {{ title }}
     </div>
     <input
       v-model="schedule.name"
@@ -94,6 +94,7 @@ import { isMatch, parse, getHours, getMinutes } from 'date-fns'
 
 export default {
   props: {
+    title: { type: String, default: 'Add Schedule' },
     scheduleInput: { type: Object, default: null }
   },
   data () {
@@ -125,13 +126,20 @@ export default {
       return items
     }
   },
-  mounted () {
-    if (this.scheduleInput !== null) {
-      this.schedule = JSON.parse(JSON.stringify(this.scheduleInput))
+  watch: {
+    scheduleInput: function (_new, _old) {
+      this.updateScheduleFromInput()
     }
   },
-
+  mounted () {
+    this.updateScheduleFromInput()
+  },
   methods: {
+    updateScheduleFromInput () {
+      if (this.scheduleInput !== null) {
+        this.schedule = JSON.parse(JSON.stringify(this.scheduleInput))
+      }
+    },
     startAdding () {
       this.schedule.name = ''
       this.schedule.items = []
