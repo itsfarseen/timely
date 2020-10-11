@@ -36,8 +36,8 @@
         </div>
         <div class="flex-1 relative">
           <div
-            v-for="data of weekData"
-            :key="data.title"
+            v-for="(data,idx) of weekData"
+            :key="idx"
             class="p-3 bg-blue-300"
             :style="weekGridStyle(data)"
           >
