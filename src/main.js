@@ -1,7 +1,5 @@
 const { app, BrowserWindow } = require('electron')
 const process = require('process')
-const path = require('path')
-const url = require('url')
 
 let win
 
