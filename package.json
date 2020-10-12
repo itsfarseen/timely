@@ -31,7 +31,10 @@
   },
   "scripts": {
     "dev": "webpack --config webpack.main.config.js && concurrently --kill-others \"webpack-dev-server --config webpack.renderer.config.js\" \"electron .\"",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build-main": "NODE_ENV=prod webpack --config webpack.main.config.js",
+    "build-renderer": "NODE_ENV=prod webpack --config webpack.renderer.config.js",
+    "app": "NODE_ENV=prod electron ."
   },
   "dependencies": {
     "tailwindcss": "^1.8.12",

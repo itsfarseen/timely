@@ -1,4 +1,7 @@
 const { app, BrowserWindow } = require('electron')
+const process = require('process')
+const path = require('path')
+const url = require('url')
 
 let win
 
@@ -15,7 +18,13 @@ function createWindow () {
   win.setAutoHideMenuBar(true)
 
   // and load the index.html of the app.
-  win.loadURL('http://localhost:8081')
+
+  if (process.env.NODE_ENV === 'dev') {
+    win.loadURL('http://localhost:8081/')
+  } else {
+    win.loadFile(`${__dirname}/../dist/index.html`)
+    console.log(__dirname)
+  }
 
   win.webContents.openDevTools()
   const installExtension = require('electron-devtools-installer')
