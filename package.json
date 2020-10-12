@@ -30,7 +30,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "dev": "webpack --config webpack.main.config.js && concurrently --kill-others \"webpack-dev-server --config webpack.renderer.config.js\" \"electron .\"",
+    "dev": "NODE_ENV=dev webpack --config webpack.main.config.js && NODE_ENV=dev concurrently --kill-others \"webpack-dev-server --config webpack.renderer.config.js\" \"electron .\"",
     "lint": "eslint .",
     "build-main": "NODE_ENV=prod webpack --config webpack.main.config.js",
     "build-renderer": "NODE_ENV=prod webpack --config webpack.renderer.config.js",
