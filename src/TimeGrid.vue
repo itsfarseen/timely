@@ -38,7 +38,8 @@
           <div
             v-for="(data,idx) of weekData"
             :key="idx"
-            class="p-3 bg-blue-300 flex flex-col group"
+            class="p-3 flex flex-col group"
+            :class="data.category == 'timetable' ? 'bg-blue-300' : 'bg-green-300'"
             :style="weekGridStyle(data)"
           >
             <div class="flex-1">

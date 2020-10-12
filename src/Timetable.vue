@@ -182,9 +182,9 @@ export default {
     saveAddSchedule (schedule) {
       this.adding = false
       if (this.thisWeekOnly) {
-        this.schedule.push(schedule)
-      } else {
         this.timetable.push(schedule)
+      } else {
+        this.schedule.push(schedule)
       }
       this.saveData()
     },
@@ -197,9 +197,9 @@ export default {
     saveEditSchedule (idx, schedule) {
       this.editing = false
       if (this.thisWeekOnly) {
-        this.schedule.splice(idx, 1, schedule)
-      } else {
         this.timetable.splice(idx, 1, schedule)
+      } else {
+        this.schedule.splice(idx, 1, schedule)
       }
       this.saveData()
     },
