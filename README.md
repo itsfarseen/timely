@@ -15,6 +15,7 @@ yarn dev
 
 ![Screenshot of Boards page](./screenshots/boards.png)
 ![Screenshot of Timetable page](./screenshots/timetable.png)
+![Screenshot of Timetable page editing](./screenshots/timetable_edit.png)
 
 ## Need help
 * [ ] yarn script to build a simple runnable package, like AppImage.
