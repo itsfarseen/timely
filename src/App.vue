@@ -29,7 +29,7 @@ export default {
   },
   data: function () {
     return {
-      tabs: ['Boards', 'Timetable', 'Schedule', 'Timetrack'],
+      tabs: ['Boards', 'Timetable', 'Timetrack'],
       tab_active: 'Boards'
     }
   }

@@ -45,7 +45,10 @@
               {{ data.title }}
             </div>
             <div class="text-sm flex gap-2 invisible group-hover:visible">
-              <a class="text-gray-700 hover:underline cursor-pointer">Edit</a>
+              <a
+                class="text-gray-700 hover:underline cursor-pointer"
+                @click="$emit('edit', {category: data.category, idx: data.idx})"
+              >Edit</a>
             </div>
           </div>
         </div>
@@ -95,6 +98,8 @@ export default {
         for (const sched of entry.items) {
           weekTimetable[sched.week].push({
             title: entry.name,
+            category: entry.category,
+            idx: entry.idx,
             from: sched.from,
             to: sched.to
           })

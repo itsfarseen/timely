@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 flex flex-col gap-3 bg-gray-200 p-4 relative">
-    <div class="flex gap-3">
+    <div class="flex gap-3 items-baseline">
       <a
         class="text-gray-600 hover:underline cursor-pointer"
         @click="startAddSchedule"
@@ -9,8 +9,23 @@
         class="text-gray-600 hover:underline cursor-pointer"
         @click="startEditSchedule"
       >Edit Schedules</a>
+      <div class="flex flex-1 justify-end gap-3">
+        <input
+          v-model="week"
+          placeholder="Week"
+          size="2"
+        >
+        <input
+          v-model="year"
+          placeholder="Year"
+          size="4"
+        >
+      </div>
     </div>
-    <TimeGrid :timetable="timetable" />
+    <TimeGrid
+      :timetable="combinedSchedule"
+      @edit="editItem"
+    />
     <!-- Add Modal -->
     <div
       v-if="adding"
@@ -30,9 +45,24 @@
       <div class="bg-white flex flex-col gap-3">
         <div class="p-3 pb-0 flex">
           <label class="flex gap-3 items-baseline"> Select Schedule
+            <div class="flex gap-3">
+              <label for="thisWeekOnly">This week only</label>
+              <input
+                id="thisWeekOnly"
+                v-model="thisWeekOnly"
+                type="checkbox"
+              >
+              <label for="everyWeek">Every Week</label>
+              <input
+                id="everyWeek"
+                type="checkbox"
+                :checked="!thisWeekOnly"
+                @click="thisWeekOnly = !$event.target.checked"
+              >
+            </div>
             <select v-model="editIdx">
               <option
-                v-for="(data, idx) in timetable"
+                v-for="(data, idx) in thisWeekOnly?timetable:schedule"
                 :key="idx"
                 :value="idx"
               >
@@ -55,7 +85,7 @@
         </div>
         <ScheduleForm
           :title="'Edit Schedule'"
-          :schedule-input="timetable[editIdx]"
+          :schedule-input="(thisWeekOnly?timetable:schedule)[editIdx]"
           @save="saveEditSchedule(editIdx, $event)"
           @cancel="cancelEditSchedule"
         />
@@ -68,6 +98,7 @@
 import TimeGrid from './TimeGrid.vue'
 import ScheduleForm from './ScheduleForm.vue'
 import data from './data.js'
+import { getWeek, getYear } from 'date-fns'
 
 export default {
   components: { TimeGrid, ScheduleForm },
@@ -76,20 +107,69 @@ export default {
       adding: false,
       editing: false,
       editIdx: 0,
-      timetable: []
+      thisWeekOnly: false,
+      timetable: [],
+      schedule: [],
+      week: 1,
+      year: 2020
+    }
+  },
+  computed: {
+    combinedSchedule () {
+      const combined = []
+      let i = 0
+      for (let sched of this.schedule) {
+        sched = JSON.parse(JSON.stringify(sched))
+        sched.category = 'schedule'
+        sched.idx = i
+        combined.push(sched)
+        i++
+      }
+      i = 0
+      for (let sched of this.timetable) {
+        sched = JSON.parse(JSON.stringify(sched))
+        sched.category = 'timetable'
+        sched.idx = i
+        combined.push(sched)
+        i++
+      }
+      return combined
+    }
+  },
+  watch: {
+    week () {
+      this.loadData()
+    },
+    year () {
+      this.loadData()
     }
   },
   mounted () {
-    this.timetable = data.loadTimetable()
+    const today = new Date()
+    this.week = getWeek(today)
+    this.year = getYear(today)
+    this.loadData()
   },
   methods: {
+    loadData () {
+      this.timetable = data.loadTimetable()
+      this.schedule = data.loadSchedule(this.week, this.year)
+    },
+    saveData () {
+      data.saveTimetable(this.timetable)
+      data.saveSchedule(this.week, this.year, this.schedule)
+    },
     startAddSchedule () {
       this.adding = true
     },
     saveAddSchedule (schedule) {
       this.adding = false
-      this.timetable.push(schedule)
-      data.saveTimetable(this.timetable)
+      if (this.thisWeekOnly) {
+        this.schedule.push(schedule)
+      } else {
+        this.timetable.push(schedule)
+      }
+      this.saveData()
     },
     cancelAddSchedule () {
       this.adding = false
@@ -99,8 +179,12 @@ export default {
     },
     saveEditSchedule (idx, schedule) {
       this.editing = false
-      this.timetable.splice(idx, 1, schedule)
-      data.saveTimetable(this.timetable)
+      if (this.thisWeekOnly) {
+        this.schedule.splice(idx, 1, schedule)
+      } else {
+        this.timetable.splice(idx, 1, schedule)
+      }
+      this.saveData()
     },
     cancelEditSchedule () {
       this.editing = false
@@ -111,6 +195,11 @@ export default {
         this.editIdx = this.timetable.length - 1
       }
       data.saveTimetable(this.timetable)
+    },
+    editItem ({ category, idx }) {
+      this.thisWeekOnly = category === 'timetable'
+      this.editIdx = idx
+      this.startEditSchedule()
     }
   }
 }
