@@ -31,11 +31,28 @@
       v-if="adding"
       class="modal-box"
     >
-      <ScheduleForm
-        :title="'Add Schedule'"
-        @save="saveAddSchedule"
-        @cancel="cancelAddSchedule"
-      />
+      <div class="bg-white flex flex-col">
+        <div class="flex gap-3 p-3">
+          <label for="thisWeekOnly">This week only</label>
+          <input
+            id="thisWeekOnly"
+            v-model="thisWeekOnly"
+            type="checkbox"
+          >
+          <label for="everyWeek">Every Week</label>
+          <input
+            id="everyWeek"
+            type="checkbox"
+            :checked="!thisWeekOnly"
+            @click="thisWeekOnly = !$event.target.checked"
+          >
+        </div>
+        <ScheduleForm
+          :title="'Add Schedule'"
+          @save="saveAddSchedule"
+          @cancel="cancelAddSchedule"
+        />
+      </div>
     </div>
     <!-- Edit Modal -->
     <div
@@ -190,11 +207,18 @@ export default {
       this.editing = false
     },
     deleteSchedule (idx) {
-      this.timetable.splice(idx, 1)
-      if (this.editIdx >= this.timetable.length) {
-        this.editIdx = this.timetable.length - 1
+      if (this.thisWeekOnly) {
+        this.timetable.splice(idx, 1)
+        if (this.editIdx >= this.timetable.length) {
+          this.editIdx = this.timetable.length - 1
+        }
+      } else {
+        this.schedule.splice(idx, 1)
+        if (this.editIdx >= this.schedule.length) {
+          this.editIdx = this.schedule.length - 1
+        }
       }
-      data.saveTimetable(this.timetable)
+      this.saveData()
     },
     editItem ({ category, idx }) {
       this.thisWeekOnly = category === 'timetable'
