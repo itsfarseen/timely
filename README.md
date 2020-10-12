@@ -11,6 +11,11 @@ yarn install
 yarn dev
 ```
 
+## Screenshots
+
+![Screenshot of Boards page](./screenshots/boards.png)
+![Screenshot of Timetable page](./screenshots/timetable.png)
+
 ## Need help
 * [ ] yarn script to build a simple runnable package, like AppImage.
 * [ ] Improve the styles in general. 
