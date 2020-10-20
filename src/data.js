@@ -67,7 +67,9 @@ function loadSchedule (week, year) {
 
 function saveSchedule (week, year, data) {
   const file = getScheduleFile(week, year)
-  fs.renameSync(file, file + '.bak')
+  if (fs.existsSync(file)) {
+    fs.renameSync(file, file + '.bak')
+  }
   const str = JSON.stringify(data)
   fs.writeFileSync(file, str)
 }
