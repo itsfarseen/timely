@@ -79,7 +79,7 @@
             </div>
             <select v-model="editIdx">
               <option
-                v-for="(data, idx) in thisWeekOnly?timetable:schedule"
+                v-for="(data, idx) in thisWeekOnly?schedule:timetable"
                 :key="idx"
                 :value="idx"
               >
@@ -102,7 +102,7 @@
         </div>
         <ScheduleForm
           :title="'Edit Schedule'"
-          :schedule-input="(thisWeekOnly?timetable:schedule)[editIdx]"
+          :schedule-input="(thisWeekOnly?schedule:timetable)[editIdx]"
           @save="saveEditSchedule(editIdx, $event)"
           @cancel="cancelEditSchedule"
         />
