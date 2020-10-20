@@ -182,9 +182,9 @@ export default {
     saveAddSchedule (schedule) {
       this.adding = false
       if (this.thisWeekOnly) {
-        this.timetable.push(schedule)
-      } else {
         this.schedule.push(schedule)
+      } else {
+        this.timetable.push(schedule)
       }
       this.saveData()
     },
@@ -197,9 +197,9 @@ export default {
     saveEditSchedule (idx, schedule) {
       this.editing = false
       if (this.thisWeekOnly) {
-        this.timetable.splice(idx, 1, schedule)
-      } else {
         this.schedule.splice(idx, 1, schedule)
+      } else {
+        this.timetable.splice(idx, 1, schedule)
       }
       this.saveData()
     },
@@ -208,12 +208,12 @@ export default {
     },
     deleteSchedule (idx) {
       if (this.thisWeekOnly) {
-        this.timetable.splice(idx, 1)
+        this.schedule.splice(idx, 1)
         if (this.editIdx >= this.timetable.length) {
           this.editIdx = this.timetable.length - 1
         }
       } else {
-        this.schedule.splice(idx, 1)
+        this.timetable.splice(idx, 1)
         if (this.editIdx >= this.schedule.length) {
           this.editIdx = this.schedule.length - 1
         }
@@ -221,7 +221,7 @@ export default {
       this.saveData()
     },
     editItem ({ category, idx }) {
-      this.thisWeekOnly = category === 'timetable'
+      this.thisWeekOnly = category === 'schedule'
       this.editIdx = idx
       this.startEditSchedule()
     }
