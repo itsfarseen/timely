@@ -135,17 +135,17 @@ export default {
     combinedSchedule () {
       const combined = []
       let i = 0
-      for (let sched of this.schedule) {
+      for (let sched of this.timetable) {
         sched = JSON.parse(JSON.stringify(sched))
-        sched.category = 'schedule'
+        sched.category = 'timetable'
         sched.idx = i
         combined.push(sched)
         i++
       }
       i = 0
-      for (let sched of this.timetable) {
+      for (let sched of this.schedule) {
         sched = JSON.parse(JSON.stringify(sched))
-        sched.category = 'timetable'
+        sched.category = 'schedule'
         sched.idx = i
         combined.push(sched)
         i++
